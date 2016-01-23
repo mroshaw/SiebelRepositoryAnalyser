@@ -154,10 +154,11 @@ namespace SiebelRepositoryWrapper
         }
 
         /// <summary>
-        ///     Return the number of lines of code across the whole repository
+        /// Return the number of lines of code across the whole repository
         /// </summary>
         /// <param name="scriptLine"></param>
         /// <param name="settings"></param>
+        /// <param name="updateStatusBar"></param>
         /// <returns></returns>
         public SiebelScriptLines GetCodeLineCount(SiebelScriptLines scriptLine, ScriptSettings settings, StatusUpdateCallback updateStatusBar)
         {
@@ -183,7 +184,6 @@ namespace SiebelRepositoryWrapper
         /// <summary>
         ///     Gets the number of code lines for a specific object type
         /// </summary>
-        /// <param name="objType"></param>
         /// <param name="busObjName"></param>
         /// <param name="busCompName"></param>
         /// <param name="codeFieldName"></param>
@@ -517,24 +517,25 @@ namespace SiebelRepositoryWrapper
         }
 
         /// <summary>
-        ///     Search for the specified search term
+        /// Search for the specified search term
         /// </summary>
         /// <param name="results"></param>
         /// <param name="searchTerm"></param>
-        /// <param name="UpdateStatusBar"></param>
-        public void SearchScript(List<SearchResults> results, string searchTerm, StatusUpdateCallback UpdateStatusBar, Boolean ignoreCase)
+        /// <param name="updateStatusBar"></param>
+        /// <param name="ignoreCase"></param>
+        public void SearchScript(List<SearchResults> results, string searchTerm, StatusUpdateCallback updateStatusBar, Boolean ignoreCase)
         {
-            SearchObjectScript("Application", "Repository Application", "Repository Application Browser Script", "Script", searchTerm, results, UpdateStatusBar, "Browser", ignoreCase);
-            SearchObjectScript("Application", "Repository Application", "Repository Application Server Script", "Script", searchTerm, results, UpdateStatusBar, "Server", ignoreCase);
+            SearchObjectScript("Application", "Repository Application", "Repository Application Browser Script", "Script", searchTerm, results, updateStatusBar, "Browser", ignoreCase);
+            SearchObjectScript("Application", "Repository Application", "Repository Application Server Script", "Script", searchTerm, results, updateStatusBar, "Server", ignoreCase);
 
-            SearchObjectScript("Applet", "Repository Applet", "Repository Applet Browser Script", "Script", searchTerm, results, UpdateStatusBar, "Browser", ignoreCase);
-            SearchObjectScript("Applet", "Repository Applet", "Repository Applet Server Script", "Script", searchTerm, results, UpdateStatusBar, "Server", ignoreCase);
+            SearchObjectScript("Applet", "Repository Applet", "Repository Applet Browser Script", "Script", searchTerm, results, updateStatusBar, "Browser", ignoreCase);
+            SearchObjectScript("Applet", "Repository Applet", "Repository Applet Server Script", "Script", searchTerm, results, updateStatusBar, "Server", ignoreCase);
 
-            SearchObjectScript("Business Component", "Repository Business Component", "Repository BusComp Browser Script", "Script", searchTerm, results, UpdateStatusBar, "Browser", ignoreCase);
-            SearchObjectScript("Business Component", "Repository Business Component", "Repository BusComp Server Script", "Script", searchTerm, results, UpdateStatusBar, "Server", ignoreCase);
+            SearchObjectScript("Business Component", "Repository Business Component", "Repository BusComp Browser Script", "Script", searchTerm, results, updateStatusBar, "Browser", ignoreCase);
+            SearchObjectScript("Business Component", "Repository Business Component", "Repository BusComp Server Script", "Script", searchTerm, results, updateStatusBar, "Server", ignoreCase);
 
-            SearchObjectScript("Business Service", "Repository Business Service", "Repository Business Service Browser Script", "Script", searchTerm, results, UpdateStatusBar, "Browser", ignoreCase);
-            SearchObjectScript("Business Service", "Repository Business Service", "Repository Business Service Server Script", "Script", searchTerm, results, UpdateStatusBar, "Server", ignoreCase);
+            SearchObjectScript("Business Service", "Repository Business Service", "Repository Business Service Browser Script", "Script", searchTerm, results, updateStatusBar, "Browser", ignoreCase);
+            SearchObjectScript("Business Service", "Repository Business Service", "Repository Business Service Server Script", "Script", searchTerm, results, updateStatusBar, "Server", ignoreCase);
         }
 
         private void SearchObjectScript(string objType, string busObjName, string busCompName, string codeFieldName,

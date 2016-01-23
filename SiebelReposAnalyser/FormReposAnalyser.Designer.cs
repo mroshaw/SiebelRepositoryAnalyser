@@ -618,7 +618,6 @@ namespace SiebelReposAnalyser
             this.ribbonButtonStop.Image = global::SiebelReposAnalyser.Properties.Resources.REPOS_stop_32;
             this.ribbonButtonStop.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButtonStop.SmallImage")));
             this.ribbonButtonStop.Text = "Cancel";
-            this.ribbonButtonStop.Click += new System.EventHandler(this.ribbonButtonStop_Click);
             // 
             // ribbonPanelExport
             // 

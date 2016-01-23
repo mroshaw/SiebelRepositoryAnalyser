@@ -150,15 +150,7 @@ namespace SiebelRepositoryWrapper
 
         public void Search(string searchTerm, List<SearchResults> results, Boolean ignoreCase)
         {
-            StringComparison compare;
-            if (ignoreCase)
-            {
-                compare = StringComparison.CurrentCultureIgnoreCase;
-            }
-            else
-            {
-                compare = StringComparison.CurrentCulture;
-            }
+            var compare = ignoreCase ? StringComparison.CurrentCultureIgnoreCase : StringComparison.CurrentCulture;
 
             int lineCount = 0;
             string[] lines = Regex.Split(ScriptCode, "\n");

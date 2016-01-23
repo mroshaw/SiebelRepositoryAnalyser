@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Globalization;
 using System.Media;
 using System.Windows.Forms;
@@ -38,8 +37,6 @@ namespace SiebelReposAnalyser
         private Settings _settings;
         private SiebelRepository _siebelApp;
 
-        private BackgroundWorker _worker;
-
         // Ribbon
         private int _orbStyleIndex;
         private String _orbStyleName;
@@ -52,7 +49,7 @@ namespace SiebelReposAnalyser
         {
             InitializeComponent();
             SetOsVersion();
-            initScintilla();
+            InitScintilla();
             comboBoxVer.SelectedIndex = 0;
 
             // Load Settings
@@ -167,7 +164,7 @@ namespace SiebelReposAnalyser
             }
         }
 
-        private void initScintilla()
+        private void InitScintilla()
         {
             scintillaScriptSearch.Margins[0].Width = 32;
              scintillaScriptSearch.Lexer = Lexer.Cpp;
@@ -431,25 +428,27 @@ namespace SiebelReposAnalyser
             int totalAdjustBrowserLines = codeLines.AdjustApplicationBsLine + codeLines.AdjustAppletBsLine +
                                           codeLines.AdjustBcbsLine + codeLines.AdjustBsbsLine;
 
-            List<ScriptCountResult> results = new List<ScriptCountResult>();
-            results.Add(new ScriptCountResult("Application",
-                codeLines.ApplicationSsLine.ToString(CultureInfo.InvariantCulture) + " (" +
-                codeLines.AdjustApplicationSsLine.ToString(CultureInfo.InvariantCulture) + ")",
-                codeLines.ApplicationBsLine.ToString(CultureInfo.InvariantCulture) + " (" +
-                codeLines.AdjustApplicationBsLine.ToString(CultureInfo.InvariantCulture) + ")",
-                totalAppLines.ToString(CultureInfo.InvariantCulture) + " (" +
-                totalAdjAppLines.ToString(CultureInfo.InvariantCulture) + ")",
-                (totalAppLines - totalAdjAppLines).ToString(CultureInfo.InvariantCulture)));
+            List<ScriptCountResult> results = new List<ScriptCountResult>
+            {
+                new ScriptCountResult("Application",
+                    codeLines.ApplicationSsLine.ToString(CultureInfo.InvariantCulture) + " (" +
+                    codeLines.AdjustApplicationSsLine.ToString(CultureInfo.InvariantCulture) + ")",
+                    codeLines.ApplicationBsLine.ToString(CultureInfo.InvariantCulture) + " (" +
+                    codeLines.AdjustApplicationBsLine.ToString(CultureInfo.InvariantCulture) + ")",
+                    totalAppLines.ToString(CultureInfo.InvariantCulture) + " (" +
+                    totalAdjAppLines.ToString(CultureInfo.InvariantCulture) + ")",
+                    (totalAppLines - totalAdjAppLines).ToString(CultureInfo.InvariantCulture)),
+                new ScriptCountResult("Applet",
+                    codeLines.AppletSsLine.ToString(CultureInfo.InvariantCulture) + " (" +
+                    codeLines.AdjustAppletSsLine.ToString(CultureInfo.InvariantCulture) + ")",
+                    codeLines.AppletBsLine.ToString(CultureInfo.InvariantCulture) + " (" +
+                    codeLines.AdjustAppletBsLine.ToString(CultureInfo.InvariantCulture) + ")",
+                    totalAppletLines.ToString(CultureInfo.InvariantCulture) + " (" +
+                    totalAdjAppletLines.ToString(CultureInfo.InvariantCulture) + ")",
+                    (totalAppletLines - totalAdjAppletLines).ToString(CultureInfo.InvariantCulture))
+            };
 
             // Populate result grid for Applet
-            results.Add(new ScriptCountResult("Applet",
-                codeLines.AppletSsLine.ToString(CultureInfo.InvariantCulture) + " (" +
-                codeLines.AdjustAppletSsLine.ToString(CultureInfo.InvariantCulture) + ")",
-                codeLines.AppletBsLine.ToString(CultureInfo.InvariantCulture) + " (" +
-                codeLines.AdjustAppletBsLine.ToString(CultureInfo.InvariantCulture) + ")",
-                totalAppletLines.ToString(CultureInfo.InvariantCulture) + " (" +
-                totalAdjAppletLines.ToString(CultureInfo.InvariantCulture) + ")",
-                (totalAppletLines - totalAdjAppletLines).ToString(CultureInfo.InvariantCulture)));
             Application.DoEvents();
 
             // Populate result grid for Bus Comp
@@ -646,15 +645,13 @@ namespace SiebelReposAnalyser
 
         public void ExportOlvToReport(FastObjectListView olv)
         {
-            ListViewPrinter lvp = new ListViewPrinter();
-            lvp.ListView = olv;
+            ListViewPrinter lvp = new ListViewPrinter {ListView = olv};
             lvp.PrintPreview();
         }
 
         public void ExportOlvToReport(ObjectListView olv)
         {
-            ListViewPrinter lvp = new ListViewPrinter();
-            lvp.ListView = olv;
+            ListViewPrinter lvp = new ListViewPrinter {ListView = olv};
             lvp.PrintPreview();
         }
 
@@ -939,10 +936,10 @@ namespace SiebelReposAnalyser
             // _worker.WorkerSupportsCancellation = true;
 
             // _worker.RunWorkerAsync();
-            DoWork(null, null);
+            DoWork();
         }
 
-        private void DoWork(object sender, DoWorkEventArgs e)
+        private void DoWork()
         {
             toolStripProgressBar.MarqueeAnimationSpeed = 100;
 
@@ -969,21 +966,6 @@ namespace SiebelReposAnalyser
             toolStripProgressBar.MarqueeAnimationSpeed = 0;
         }
 
-        private void WorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (e.Cancelled)
-            {
-                toolStripStatusLabel.Text = "Cancelled - Ready";
-            }
-            else
-            {
-                toolStripStatusLabel.Text = "Completed - Ready";
-            }
-            toolStripProgressBar.Value = 0;
-            ribbonButtonGo.Enabled = true;
-            ribbonButtonStop.Enabled = false;
-        }
-
         private void ribbonButtonHelp_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("http://www.siebel-tech.com/forums/forum/siebel-store-support/product-support/siebel-repository-analyser/");
@@ -993,14 +975,6 @@ namespace SiebelReposAnalyser
         {
             UpdateApplication();
 
-        }
-
-        private void ribbonButtonStop_Click(object sender, EventArgs e)
-        {
-            if (_worker.IsBusy)
-            {
-                _worker.CancelAsync();
-            }
         }
 
         private void ribbonButtonReport_Click(object sender, EventArgs e)
