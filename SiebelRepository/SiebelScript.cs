@@ -130,11 +130,17 @@ namespace SiebelRepositoryWrapper
         /// <returns></returns>
         private static string GetBlock(string code)
         {
+            if (code == null)
+                return "";
             // Keep count of open bracks
             int openBrackets = 0;
             // Start at first bracket
             int pos = code.IndexOf("{", StringComparison.Ordinal);
             int len = code.Length;
+
+            if (pos == 0 || len == 0)
+                return "";
+
             do
             {
                 // Parse code and count closing brackets until we find the matching one
