@@ -33,6 +33,10 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Interop.SiebelBusObjectInterfaces">
+      <HintPath>..\ExternalReferences\Interop.SiebelBusObjectInterfaces.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,7 +45,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="TWSiebelLib">
-      <HintPath>..\..\SharedControls\TWSiebelLib.dll</HintPath>
+      <HintPath>..\ExternalReferences\TWSiebelLib.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
   </ItemGroup>
@@ -59,17 +63,6 @@
     <Compile Include="SiebelScript.cs" />
     <Compile Include="SiebelScriptLines.cs" />
     <Compile Include="SiebelUsers.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="SiebelBusObjectInterfaces">
-      <Guid>{37073DA8-4CEA-11D2-A3DC-0008C78A05F9}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

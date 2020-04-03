@@ -57,13 +57,13 @@
       <Value Profile="(Default)">Office_2013</Value>
     </Setting>
     <Setting Name="OfficeStyleIndex" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">3</Value>
+      <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="ThemeColour" Type="System.Windows.Forms.RibbonTheme" Scope="User">
       <Value Profile="(Default)">Black</Value>
     </Setting>
     <Setting Name="ThemeIndex" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">3</Value>
+      <Value Profile="(Default)">1</Value>
     </Setting>
   </Settings>
 </SettingsFile>

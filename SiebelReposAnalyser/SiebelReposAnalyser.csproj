@@ -102,34 +102,34 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutomaticUpdater, Version=2.6.18.4, Culture=neutral, PublicKeyToken=437887616030daaf, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Release\AutomaticUpdater.dll</HintPath>
+      <HintPath>..\packages\AutomaticUpdater.2.6.18.4\lib\net40\AutomaticUpdater.dll</HintPath>
     </Reference>
     <Reference Include="CustomControls">
-      <HintPath>..\..\SharedControls\CustomControls.dll</HintPath>
+      <HintPath>..\ExternalReferences\CustomControls.dll</HintPath>
     </Reference>
-    <Reference Include="ListViewPrinter, Version=2.5.0.29289, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SharedControls\ListViewPrinter.dll</HintPath>
+    <Reference Include="Interop.SiebelBusObjectInterfaces">
+      <HintPath>..\ExternalReferences\Interop.SiebelBusObjectInterfaces.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Microsoft.WindowsAPICodePack">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio 10.0\Windows API Code Pack 1.1\binaries\Microsoft.WindowsAPICodePack.dll</HintPath>
+    <Reference Include="ListViewPrinter">
+      <HintPath>..\ExternalReferences\ListViewPrinter.dll</HintPath>
     </Reference>
-    <Reference Include="ObjectListView, Version=2.8.1.33936, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
-      <HintPath>..\packages\ObjectListView.Official.2.8.1\lib\net20\ObjectListView.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack-Core.1.1.2\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
     </Reference>
-    <Reference Include="ScintillaNET, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\jacobslusser.ScintillaNET.3.1.0-rc\lib\net40\ScintillaNET.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
+      <HintPath>..\packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
+    </Reference>
+    <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
     <Reference Include="System.Management" />
     <Reference Include="System.Numerics" />
-    <Reference Include="System.Windows.Forms.Ribbon35">
-      <HintPath>..\..\SharedControls\System.Windows.Forms.Ribbon35.dll</HintPath>
+    <Reference Include="System.Windows.Forms.Ribbon35, Version=3.5.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Forms.Ribbon35.3.5.8.0\lib\net35\System.Windows.Forms.Ribbon35.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -139,6 +139,10 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="TWSiebelLib">
+      <HintPath>..\ExternalReferences\TWSiebelLib.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AboutBox.cs">
@@ -314,15 +318,7 @@
     <None Include="Resources\REPOS_favorite_32.png" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="SiebelBusObjectInterfaces">
-      <Guid>{37073DA8-4CEA-11D2-A3DC-0008C78A05F9}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
+    <Content Include="Updates.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
